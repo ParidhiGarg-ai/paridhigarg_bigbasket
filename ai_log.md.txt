@@ -1,0 +1,99 @@
+AI prompt # 1 for TASK 5 PART C - 
+
+
+role : you are a professional sql coder drafting a sql code for a junior analyst.
+
+context : there is category_target table with columns : category, target_revenue_inr ;
+in a previous query, i had run a query and find out my total_category_revenue(not saved yet it is just a query run)
+
+task :a derived-fields query that joins your category-level total revenue to the `category_targets` table and computes `variance = target_revenue_inr - total_revenue` and `percentage_variance = ((total_revenue - target_revenue_inr) * 100.0) / target_revenue_inr` for each category, tagged `'Above Target'` when `total_revenue >= target_revenue_inr`, `'Below Target - Watch'` when the shortfall is within 15%, else `'Below Target - Critical'`
+
+constraints : `total_revenue` and `target_revenue_inr` are both `INTEGER` columns, so writing the formula as `(total_revenue - target_revenue_inr) / target_revenue_inr` alone truncates to an integer (almost always `0`) before the `* 100` ever runs. The formula given above already multiplies by `100.0` first (equivalently, wrap either operand in `CAST(... AS REAL)`) — use it exactly as written so the true percentage comes through, not a truncated `0`. do not add any numbers on your own
+
+format: produce a sql query simply.
+
+
+
+
+
+OUTPUT - with category_revenue as (
+    select
+        p.category,
+        sum(o.amount_inr) as total_revenue
+    from orders o
+    join products p
+        on o.product_id = p.product_id
+    group by p.category
+)
+select
+    cr.category,
+    cr.total_revenue,
+    ct.target_revenue_inr,
+    (ct.target_revenue_inr - cr.total_revenue) as variance,
+    ((cr.total_revenue - ct.target_revenue_inr) * 100.0) / ct.target_revenue_inr as percentage_variance,
+    case
+        when cr.total_revenue >= ct.target_revenue_inr then 'Above Target'
+        when ((cr.total_revenue - ct.target_revenue_inr) * 100.0) / ct.target_revenue_inr >= -15 then 'Below Target - Watch'
+        else 'Below Target - Critical'
+    end as target_status
+from category_revenue cr
+join category_targets ct
+    on cr.category = ct.category;
+
+
+
+
+Verification process = 
+read every line and checked the column names - added the alias functions  for correct syntax. 
+Before running it directly on the entire data I checked on -  
+Category  :               
+Bakery	                 
+Dairy & Eggs	       
+Fruits & Vegetables
+	
+By using clauses'where' and 'limit'. 
+Did a sanity check, if the results made sense and they did.
+
+
+
+AI PROMPT#2
+Role : you are a professional pandas coder coding for a junior analyst
+Context : the amount_inr column - maximum values are extremely high as compared to mode and median in the raw orders table while cleaning it.
+Task :  for Delivered, non-null amount_inr values, compute Q1 (25th percentile) and Q3 (75th percentile) via .quantile(), compute IQR = Q3 - Q1, and the upper fence Q3 + 1.5*IQR . 
+Cap values above upper using clip(upper= )
+
+Constraints - Don't drop, cap the values and the lower fence will be negative here, so there are no low-side outliers to worry about)
+
+Format - Generate a simple code for this. 
+
+
+Output generated = 
+import pandas as pd
+
+df = pd.read_csv('orders_raw.csv')
+
+# Filter to Delivered orders with non-null amount_inr
+delivered = df[(df['status'] == 'Delivered') & (df['amount_inr'].notna())]
+
+# Q1, Q3, and IQR
+Q1 = delivered['amount_inr'].quantile(0.25)
+Q3 = delivered['amount_inr'].quantile(0.75)
+IQR = Q3 - Q1
+
+# Upper fence (lower fence is negative here, so no low-side outliers)
+upper_fence = Q3 + 1.5 * IQR
+
+# Cap values above the upper fence (don't drop)
+[delivered[ 'amount_inr'] = delivered['amount_inr'].clip(upper=upper_fence)
+
+print(f"Q1: {Q1}, Q3: {Q3}, Upper fence: {upper_fence}")
+print(f"Rows capped: {(delivered['amount_inr'] > upper_fence).sum()}")
+
+
+
+Verification process - 
+1.read every line, and removed the unnecessary lines that have been coded already.
+2. Checked each word and replaced df with df_raw(variable that I have used).
+3. For the better understanding of the examiner, added lower fence formula
+4.Ran it - the answer came 17 rows, manually checked it again. (Sanity check) and used a variable n_capped to store (delivered['amount_inr'] > upper_fence).sum()}"
+
