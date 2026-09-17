@@ -27,6 +27,6 @@ REPO STRUCTURE
 └── PART FOUR README.md                           # data story and Tableau public dashboard
 https://prod-in-a.online.tableau.com/#/site/gargparidhi24-5b38fa748a/workbooks/1573779?:origin=card_share_link - TABLEAU 
 
-pointer to the data story - 
+pointer to the data story - README.md
 pointer to ai_log.md - ai_log.md.txt
 pointer to part 4 notebook - 
