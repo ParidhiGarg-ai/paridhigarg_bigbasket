@@ -1,3 +1,5 @@
 # paridhigarg_bigbasket
 
 Tableau public dashboard link - https://prod-in-a.online.tableau.com/#/site/gargparidhi24-5b38fa748a/workbooks/1573779?:origin=card_share_link
+
+Datastory -   3 categories - Bakery, Household Essentials and Personal care are ahead of target by 3410 INR, 4715 INR and 882 INR respectively. 3 categories - Dairy and eggs, Fruits and Vegetables and Snacks and Beverages are behind the target by 2410 INR, 2210 INR, 2105 INR respectively. 2 concrete recommendations - 1. Dairy and Eggs require the most catalog and marketing effort because the gape between target revenue and total revenue is the highest (2410 INR), which means that this category needs to earn more by expanding it's business to at least meet the target revenue set. 2. Supplier review is required so that supply chains can be extended more to help in expansion and growth. Household essentials is above its target the most by 4715 INR, therefore, it is a category that has potential. Supplier review will help to enhance its distribution channels and help it grow more. 
