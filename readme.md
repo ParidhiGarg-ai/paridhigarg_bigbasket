@@ -1,4 +1,4 @@
-The prroject has four parts - A demo data analytics on bigbasket. Part One deals with SQL, part 2 - spreadsheets, part 3 - 
+The project has four parts - A demo data analytics on bigbasket. Part One deals with SQL, part 2 - spreadsheets, part 3 - 
 Tableau and part 4 - Pandas. In this project, we analyse monthly revenue to make different comparisons and clean the raw data too. 
 All these four parts are interconnect with each other. We started with generating a python script and running to create a database, 
 verified the numbers and then did SQl queries. Exported one of the results as csv to create a spreadsheet and Tableau. Cleaned the raw unfiltered 
