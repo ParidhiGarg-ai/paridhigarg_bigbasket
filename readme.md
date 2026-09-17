@@ -29,4 +29,4 @@ https://prod-in-a.online.tableau.com/#/site/gargparidhi24-5b38fa748a/workbooks/1
 
 pointer to the data story - README.md
 pointer to ai_log.md - ai_log.md.txt
-pointer to part 4 notebook - 
+pointer to part 4 notebook - analysis.ipynb
